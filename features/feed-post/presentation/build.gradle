@@ -35,8 +35,8 @@ android {
 
 dependencies {
 
-    implementation project(':features:post:domain')
-    implementation project(':features:post:data')
+    implementation project(':features:feed-post:domain')
+    implementation project(':features:feed-post:data')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -51,4 +51,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}"
     implementation "io.insert-koin:koin-android:3.1.5"
+    implementation "de.hdodenhof:circleimageview:2.2.0"
+
 }

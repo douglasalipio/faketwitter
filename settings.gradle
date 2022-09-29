@@ -14,6 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Faketwitter"
 include ':app'
-include ':features:post:domain'
-include ':features:post:data'
-include ':features:post:presentation'
+include ':features:feed-post:domain'
+include ':features:feed-post:data'
+include ':features:feed-post:presentation'

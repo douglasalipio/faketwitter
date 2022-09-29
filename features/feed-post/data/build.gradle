@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation project(':features:post:domain')
+    implementation project(':features:feed-post:domain')
 
     testImplementation "io.mockk:mockk:1.12.2"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
