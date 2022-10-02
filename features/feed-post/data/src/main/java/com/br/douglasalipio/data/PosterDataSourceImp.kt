@@ -13,4 +13,7 @@ class PosterDataSourceImp(private val posterLocalStorage: PosterLocalStorage) : 
 
     override suspend fun getDefaultUserProfile() = posterLocalStorage.getDefaultUserProfile()
 
+    override suspend fun getTotalUserPosts(userId: Int) =
+        posterLocalStorage.getTotalPostByUser(userId)
+
 }

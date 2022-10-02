@@ -62,6 +62,7 @@
             android:textColor="@android:color/black"
             pocketBlog:autoSizeStepGranularity="1sp"
             pocketBlog:layout_constraintBottom_toBottomOf="parent"
+
             pocketBlog:layout_constraintEnd_toEndOf="parent"
             pocketBlog:layout_constraintTop_toTopOf="parent"
             tools:text="35" />

@@ -1,4 +1,4 @@
-package com.br.douglasalipio.presentation.components
+package com.br.douglasalipio.presentation.components.states
 
 import com.br.douglasalipio.domain.entities.Post
 

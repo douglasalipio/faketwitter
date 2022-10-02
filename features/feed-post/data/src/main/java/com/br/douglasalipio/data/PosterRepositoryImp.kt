@@ -13,4 +13,6 @@ class PosterRepositoryImp(private val dataSource: PosterDataSource) : PosterRepo
 
     override suspend fun getDefaultUserProfile() = dataSource.getDefaultUserProfile().mapToDomain()
 
+    override suspend fun getTotalUserPosts(userId: Int) = dataSource.getTotalUserPosts(userId)
+
 }

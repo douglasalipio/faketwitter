@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.br.douglasalipio.presentation.components.viewAdapters.PosterRecyclerViewAdapter
 import com.br.douglasalipio.presentation.components.viewmodels.PosterViewModel
 import com.br.douglasalipio.presentation.R
-import com.br.douglasalipio.presentation.components.PosterListFragmentState
+import com.br.douglasalipio.presentation.components.states.PosterListFragmentState
 import com.br.douglasalipio.presentation.databinding.PosterFragmentListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

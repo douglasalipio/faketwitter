@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.douglasalipio.domain.interactors.FetchFeedUseCase
 import com.br.douglasalipio.domain.states.PosterListState
-import com.br.douglasalipio.presentation.components.PosterListFragmentState
+import com.br.douglasalipio.presentation.components.states.PosterListFragmentState
 import kotlinx.coroutines.launch
 
 class PosterViewModel(private val fetchFeedUseCase: FetchFeedUseCase) : ViewModel() {

@@ -11,4 +11,6 @@ interface PosterRepository {
 
     suspend fun getDefaultUserProfile(): UserProfile
 
+    suspend fun getTotalUserPosts(userId: Int): Int
+
 }

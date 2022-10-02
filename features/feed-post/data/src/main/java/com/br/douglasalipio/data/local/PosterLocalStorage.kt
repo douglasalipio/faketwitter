@@ -15,26 +15,22 @@ class PosterLocalStorage {
             listOf(
                 UserProfileModel(
                     id = 0,
-                    username = "d.mesquita",
-                    dateJoined = "March 25, 2021",
-                    totalPost = 0
+                    username = "@d.mesquita",
+                    dateJoined = "March 25, 2021"
                 ),
                 UserProfileModel(
                     id = 1,
-                    username = "d.mesquita",
-                    dateJoined = "March 25, 2021",
-                    totalPost = 0
+                    username = "@melhortimesanta",
+                    dateJoined = "March 25, 2021"
                 ),
                 UserProfileModel(
                     id = 2,
-                    username = "cat4sale",
+                    username = "@cat4sale",
                     dateJoined = "March 01, 2021",
-                    totalPost = 0
                 ), UserProfileModel(
                     id = 3,
-                    username = "melhortimesanta",
-                    dateJoined = "April 25, 2021",
-                    totalPost = 0
+                    username = "@josesilva",
+                    dateJoined = "April 25, 2021"
                 )
             )
         )
@@ -60,6 +56,8 @@ class PosterLocalStorage {
         )
 
     }
+
+    fun getTotalPostByUser(userId: Int) = users.filter { it.id == userId }.size
 
     fun getUserById(userId: Int) = users[userId]
 
