@@ -35,7 +35,9 @@ class PosterListFragment : Fragment(R.layout.poster_fragment_list) {
     }
 
     private fun setUpComponents() {
-        viewBinding.postContentButton.setOnClickListener { viewModel }
+        viewBinding.postContentButton.setOnClickListener {
+
+        }
     }
 
     private fun showFeedList(posts: List<Post>) {

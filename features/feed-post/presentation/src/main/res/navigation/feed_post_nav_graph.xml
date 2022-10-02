@@ -8,25 +8,21 @@
     <fragment
         android:id="@+id/posterFragmentListView"
         android:name="com.br.douglasalipio.presentation.components.screens.PosterListFragment"
-        tools:layout="@layout/post_content_fragment" />
-
-    <fragment
-        android:id="@+id/posterContentFragment"
-        android:name="com.br.douglasalipio.presentation.components.screens.PostContentFragment"
         tools:layout="@layout/post_content_fragment">
 
-        <!--        <action-->
-        <!--            android:id="@+id/action_FirstFragment_to_SecondFragment"-->
-        <!--            app:destination="@id/SecondFragment" />-->
+        <action
+            android:id="@+id/action_schedule_call_fragment_to_bottom_sheet_dialog"
+            app:destination="@id/bottom_sheet_dialog" />
     </fragment>
-    <!--    <fragment-->
-    <!--        android:id="@+id/SecondFragment"-->
-    <!--        android:name="com.br.douglasalipio.faketwitter.SecondFragment"-->
-    <!--        android:label="@string/second_fragment_label"-->
-    <!--        tools:layout="@layout/fragment_second">-->
 
-    <!--        <action-->
-    <!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
-    <!--            app:destination="@id/FirstFragment" />-->
-    <!--    </fragment>-->
+    <dialog
+        android:id="@+id/bottom_sheet_dialog"
+        android:name="com.br.douglasalipio.presentation.components.screens.PostContentBottomSheet"
+        tools:layout="@layout/post_content_fragment">
+
+        <argument
+            android:name="content"
+            app:argType="string" />
+
+    </dialog>
 </navigation>
