@@ -2,27 +2,19 @@ package com.br.douglasalipio.presentation.components.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.br.douglasalipio.domain.entities.Post
 import com.br.douglasalipio.domain.entities.UserProfile
 import com.br.douglasalipio.presentation.R
-import com.br.douglasalipio.presentation.components.states.PosterListFragmentState
 import com.br.douglasalipio.presentation.components.states.UserProfileFragmentState
-import com.br.douglasalipio.presentation.components.viewAdapters.PosterRecyclerViewAdapter
-import com.br.douglasalipio.presentation.components.viewmodels.PosterViewModel
 import com.br.douglasalipio.presentation.components.viewmodels.UserProfileViewModel
-import com.br.douglasalipio.presentation.databinding.FragmentUserProfileBinding
-import com.br.douglasalipio.presentation.databinding.PosterFragmentListBinding
+import com.br.douglasalipio.presentation.databinding.UserProfileFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
 
-    private val viewBinding by viewBinding(FragmentUserProfileBinding::bind)
+    private val viewBinding by viewBinding(UserProfileFragmentBinding::bind)
     private val viewModel: UserProfileViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
