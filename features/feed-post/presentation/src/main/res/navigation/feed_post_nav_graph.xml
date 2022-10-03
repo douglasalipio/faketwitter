@@ -8,21 +8,16 @@
     <fragment
         android:id="@+id/posterFragmentListView"
         android:name="com.br.douglasalipio.presentation.components.screens.PosterListFragment"
-        tools:layout="@layout/post_content_fragment">
+        tools:layout="@layout/poster_fragment_list">
 
         <action
-            android:id="@+id/action_schedule_call_fragment_to_bottom_sheet_dialog"
+            android:id="@+id/action_posterList_fragment_to_post_content_bottom_sheet"
             app:destination="@id/bottom_sheet_dialog" />
     </fragment>
 
     <dialog
         android:id="@+id/bottom_sheet_dialog"
         android:name="com.br.douglasalipio.presentation.components.screens.PostContentBottomSheet"
-        tools:layout="@layout/post_content_fragment">
+        tools:layout="@layout/post_content_fragment" />
 
-        <argument
-            android:name="content"
-            app:argType="string" />
-
-    </dialog>
 </navigation>

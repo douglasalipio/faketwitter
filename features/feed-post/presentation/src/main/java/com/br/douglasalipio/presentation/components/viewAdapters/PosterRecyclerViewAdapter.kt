@@ -8,7 +8,8 @@ import com.br.douglasalipio.domain.entities.Post
 import com.br.douglasalipio.presentation.databinding.PosterFragmentItemBinding
 
 class PosterRecyclerViewAdapter(
-    private val values: List<Post>
+    private val values: List<Post>,
+    private val onRetweetActionClick: (String) -> Unit
 ) : RecyclerView.Adapter<PosterRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +27,7 @@ class PosterRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.contentView.text = item.content
+        holder.contentView.setOnClickListener { onRetweetActionClick("") }
     }
 
     override fun getItemCount(): Int = values.size

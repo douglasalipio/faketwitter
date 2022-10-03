@@ -18,10 +18,9 @@ class PostContentBottomSheet : BottomSheetDialogFragment() {
     private val viewBiding by viewBinding(PostContentBottomSheetBinding::bind)
     //private val args: PostContentDial by navArgs()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     private fun setUpPostContentButton() {

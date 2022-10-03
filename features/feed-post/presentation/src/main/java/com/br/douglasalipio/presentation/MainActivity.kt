@@ -1,4 +1,4 @@
-package com.br.douglasalipio.faketwitter
+package com.br.douglasalipio.presentation
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,7 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import com.br.douglasalipio.faketwitter.databinding.ActivityMainBinding
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.br.douglasalipio.presentation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

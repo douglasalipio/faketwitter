@@ -2,38 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/posterFragmentListView"
-    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:defaultNavHost="true"
-    app:layoutManager="LinearLayoutManager"
-    app:navGraph="@navigation/feed_post_nav_graph">
+    android:layout_height="match_parent">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/userProfileContainerView"
         android:name="com.br.douglasalipio.presentation.components.screens.UserProfileFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:name="com.br.douglasalipio.presentation.ItemFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userProfileContainerView"
-        app:layout_constraintVertical_bias="1.0"
         tools:context=".components.screens.PosterListFragment"
-        tools:layout_editor_absoluteX="24dp"
         tools:listitem="@layout/poster_fragment_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/postContentButton"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -41,5 +31,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_dialog_email"
         tools:ignore="ContentDescription" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
