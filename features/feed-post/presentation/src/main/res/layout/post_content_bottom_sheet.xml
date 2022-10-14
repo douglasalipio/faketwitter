@@ -3,35 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".components.screens.PostContentBottomSheet">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/postContentLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+    <AutoCompleteTextView
+        android:id="@+id/postContentAutocompleteText"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:autofillHints="name"
+        android:gravity="top|left"
+        android:hint="Write your post"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:lines="20"
+        android:minLines="5"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/postContentBottomSheetButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Write"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/postContentAutoCompleteText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="text"
-            tools:ignore="TouchTargetSizeCheck"
-            tools:text="Write your content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/postContentBottomSheetButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="Post"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/postContentAutocompleteText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

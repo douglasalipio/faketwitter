@@ -10,5 +10,6 @@ fun PostModel.mapToDomain() = Post(content = this.content, user = this.user.mapT
 fun UserProfileModel.mapToDomain() = UserProfile(
     id = this.id,
     username = this.username,
-    dateJoined = this.dateJoined
+    dateJoined = this.dateJoined,
+    imageName = this.imageName
 )

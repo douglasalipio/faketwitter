@@ -9,6 +9,8 @@ class PosterDataSourceImp(private val posterLocalStorage: PosterLocalStorage) : 
 
     override suspend fun getUserById(userId: Int) = posterLocalStorage.getUserById(userId)
 
+    override suspend fun getAllNames() = posterLocalStorage.getAllNames()
+
     override suspend fun fetchFeed(): List<PostModel> = posterLocalStorage.fetchFeed()
 
     override suspend fun getDefaultUserProfile() = posterLocalStorage.getDefaultUserProfile()

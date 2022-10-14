@@ -10,6 +10,8 @@ interface PosterDataSource {
 
     suspend fun getUserById(userId: Int): UserProfileModel
 
+    suspend fun getAllNames(): List<String>
+
     suspend fun fetchFeed(): List<PostModel>
 
     suspend fun getDefaultUserProfile(): UserProfileModel

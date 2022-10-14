@@ -16,21 +16,25 @@ class PosterLocalStorage {
                 UserProfileModel(
                     id = 0,
                     username = "@d.mesquita",
-                    dateJoined = "March 25, 2021"
+                    dateJoined = "March 25, 2021",
+                    imageName = "mouse.jpeg"
                 ),
                 UserProfileModel(
                     id = 1,
                     username = "@melhortimesanta",
-                    dateJoined = "March 25, 2021"
+                    dateJoined = "March 25, 2021",
+                    imageName = "cool_monkey.png"
                 ),
                 UserProfileModel(
                     id = 2,
                     username = "@cat4sale",
                     dateJoined = "March 01, 2021",
+                    imageName = "piu_piu.png"
                 ), UserProfileModel(
                     id = 3,
                     username = "@josesilva",
-                    dateJoined = "April 25, 2021"
+                    dateJoined = "April 25, 2021",
+                    imageName = "hal_9000.jpeg"
                 )
             )
         )
@@ -56,6 +60,8 @@ class PosterLocalStorage {
         )
 
     }
+
+    fun getAllNames() = users.map { it.username }
 
     fun getTotalPostByUser(userId: Int) = users.filter { it.id == userId }.size
 

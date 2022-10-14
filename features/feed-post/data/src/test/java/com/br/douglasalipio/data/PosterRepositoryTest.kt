@@ -43,7 +43,7 @@ class PosterRepositoryTest {
     @Test
     fun `GIVEN user id WHEN get user is called THEN returns user`() = runTest {
         //given
-        val userProfile = UserProfileModel(1, "username", "April 25, 2021", 1)
+        val userProfile = UserProfileModel(1, "username", "April 25, 2021", "local_image")
         coEvery { dataSource.getUserById(1) } returns userProfile
         //when
         val domainUser = repository.getUserById(1)
@@ -54,7 +54,7 @@ class PosterRepositoryTest {
     @Test
     fun `WHEN get default user is called THEN returns user`() = runTest {
         //given
-        val userProfile = UserProfileModel(1, "username", "April 25, 2021", 1)
+        val userProfile = UserProfileModel(1, "username", "April 25, 2021", "local_image")
         coEvery { dataSource.getDefaultUserProfile() } returns userProfile
         //when
         val domainUser = repository.getDefaultUserProfile()

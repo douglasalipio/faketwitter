@@ -7,6 +7,8 @@ interface PosterRepository {
 
     suspend fun getUserById(userId: Int): UserProfile
 
+    suspend fun getAllNames(): List<String>
+
     suspend fun fetchFeed(): List<Post>
 
     suspend fun getDefaultUserProfile(): UserProfile
