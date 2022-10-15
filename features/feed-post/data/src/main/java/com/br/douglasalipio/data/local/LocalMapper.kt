@@ -1,16 +1,16 @@
 package com.br.douglasalipio.data.local
 
-import com.br.douglasalipio.data.local.models.PostModel
-import com.br.douglasalipio.data.local.models.UserProfileModel
-import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.domain.entities.UserProfile
+import com.br.douglasalipio.data.local.models.TweetModel
+import com.br.douglasalipio.data.local.models.ProfileModel
+import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.domain.entities.Profile
 
-fun PostModel.mapToDomain() = Post(content = this.content, user = this.user.mapToDomain())
-fun Post.mapToData() = PostModel(this.content, this.user.mapToData())
-fun UserProfile.mapToData() =
-    UserProfileModel(this.id, this.username, this.dateJoined, this.imageName)
+fun TweetModel.mapToDomain() = Tweet(content = this.content, user = this.user.mapToDomain())
+fun Tweet.mapToData() = TweetModel(this.content, this.user.mapToData())
+fun Profile.mapToData() =
+    ProfileModel(this.id, this.username, this.dateJoined, this.imageName)
 
-fun UserProfileModel.mapToDomain() = UserProfile(
+fun ProfileModel.mapToDomain() = Profile(
     id = this.id,
     username = this.username,
     dateJoined = this.dateJoined,

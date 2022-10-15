@@ -1,36 +1,34 @@
 package com.br.douglasalipio.data.local
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.br.douglasalipio.data.local.models.PostModel
-import com.br.douglasalipio.data.local.models.UserProfileModel
+import com.br.douglasalipio.data.local.models.TweetModel
+import com.br.douglasalipio.data.local.models.ProfileModel
 
-class PosterLocalStorage {
+class PosterFeedLocalStorage {
 
-    private val posts = mutableListOf<PostModel>()
-    private val users = mutableListOf<UserProfileModel>()
+    private val posts = mutableListOf<TweetModel>()
+    private val users = mutableListOf<ProfileModel>()
 
     init {
         users.addAll(
             listOf(
-                UserProfileModel(
+                ProfileModel(
                     id = 0,
                     username = "@d.mesquita",
                     dateJoined = "March 25, 2021",
                     imageName = "mouse.jpeg"
                 ),
-                UserProfileModel(
+                ProfileModel(
                     id = 1,
                     username = "@melhortimesanta",
                     dateJoined = "March 25, 2021",
                     imageName = "cool_monkey.png"
                 ),
-                UserProfileModel(
+                ProfileModel(
                     id = 2,
                     username = "@cat4sale",
                     dateJoined = "March 01, 2021",
                     imageName = "piu_piu.png"
-                ), UserProfileModel(
+                ), ProfileModel(
                     id = 3,
                     username = "@josesilva",
                     dateJoined = "April 25, 2021",
@@ -40,19 +38,19 @@ class PosterLocalStorage {
         )
         posts.addAll(
             listOf(
-                PostModel(
+                TweetModel(
                     content = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
                     user = users[0]
-                ), PostModel(
+                ), TweetModel(
                     content = "Graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
                     user = users[1]
                 ),
-                PostModel(
+                TweetModel(
                     content =
                     "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
                     user = users[2]
                 ),
-                PostModel(
+                TweetModel(
                     content = "In publishing and graphic design, Lorem ipsum is a placeholder text",
                     user = users[3]
                 )
@@ -68,12 +66,12 @@ class PosterLocalStorage {
 
     fun getUserById(userId: Int) = users[userId]
 
-    fun fetchFeed(): List<PostModel> = posts
+    fun fetchFeed(): List<TweetModel> = posts
 
     fun getDefaultUserProfile() = users[0]
 
-    fun postContent(postModel: PostModel): List<PostModel> {
-        posts.add(postModel)
+    fun postContent(tweetModel: TweetModel): List<TweetModel> {
+        posts.add(tweetModel)
         return posts.toList()
     }
 }

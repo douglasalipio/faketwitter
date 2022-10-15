@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.br.douglasalipio.domain.entities.Post
+import com.br.douglasalipio.domain.entities.Tweet
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.br.douglasalipio.presentation.R
 import com.br.douglasalipio.presentation.databinding.PosterFragmentListBinding
@@ -28,7 +28,7 @@ class FeedListFragment : Fragment(R.layout.poster_fragment_list) {
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is FeedViewState.LoadFail -> {}
-                is FeedViewState.Loaded -> showFeedList(state.posts)
+                is FeedViewState.Loaded -> showFeedList(state.tweets)
             }
         }
     }
@@ -46,10 +46,10 @@ class FeedListFragment : Fragment(R.layout.poster_fragment_list) {
         findNavController().navigate(action)
     }
 
-    private fun showFeedList(posts: List<Post>) {
+    private fun showFeedList(tweets: List<Tweet>) {
         viewBinding.list.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = FeedRecyclerViewAdapter(posts, onRetweetActionClick)
+            adapter = FeedRecyclerViewAdapter(tweets, onRetweetActionClick)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.br.douglasalipio.data.local.models
 
-data class UserProfileModel(
+data class ProfileModel(
     val id: Int,
     val username: String,
     val dateJoined: String,

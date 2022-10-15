@@ -1,6 +1,6 @@
 package com.br.douglasalipio.domain.entities
 
-data class UserProfile(
+data class Profile(
     val id: Int,
     val username: String,
     val dateJoined: String,

@@ -3,18 +3,18 @@ package com.br.douglasalipio.presentation.components.tweet
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.douglasalipio.domain.entities.UserProfile
+import com.br.douglasalipio.domain.entities.Profile
 import com.br.douglasalipio.domain.interactors.GetAllUserNamesUseCase
-import com.br.douglasalipio.domain.interactors.GetDefaultUserProfileUseCase
-import com.br.douglasalipio.domain.interactors.PostContentUserCase
+import com.br.douglasalipio.domain.interactors.GetDefaultProfileUseCase
+import com.br.douglasalipio.domain.interactors.TweetContentUserCase
 import com.br.douglasalipio.domain.states.GetAllUsernamesState
-import com.br.douglasalipio.domain.states.UserProfileState
+import com.br.douglasalipio.domain.states.ProfileState
 import kotlinx.coroutines.launch
 
 class TwitteViewModel(
-    private val getDefaultUserProfileUseCase: GetDefaultUserProfileUseCase,
+    private val getDefaultProfileUseCase: GetDefaultProfileUseCase,
     private val getAllUserNamesUseCase: GetAllUserNamesUseCase,
-    private val postContentUserCase: PostContentUserCase
+    private val tweetContentUserCase: TweetContentUserCase
 ) : ViewModel() {
 
     val viewState = MutableLiveData<TweetViewState>()
@@ -35,18 +35,18 @@ class TwitteViewModel(
 
     fun requestPostContent(content: String) {
         viewModelScope.launch {
-            getDefaultUserProfileUseCase.execute().let { userState ->
+            getDefaultProfileUseCase.execute().let { userState ->
                 when (userState) {
-                    is UserProfileState.Loaded -> postContent(content, userState.defaultUser)
+                    is ProfileState.Loaded -> postContent(content, userState.defaultUser)
                     else -> {}
                 }
             }
         }
     }
 
-    private fun postContent(content: String, userProfile: UserProfile) {
+    private fun postContent(content: String, profile: Profile) {
         viewModelScope.launch {
-            postContentUserCase.execute(PostContentUserCase.Params(userProfile, content))
+            tweetContentUserCase.execute(TweetContentUserCase.Params(profile, content))
         }
     }
 

@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.br.douglasalipio.domain.entities.Post
+import com.br.douglasalipio.domain.entities.Tweet
 import com.br.douglasalipio.presentation.databinding.FeedFragmentItemBinding
 import de.hdodenhof.circleimageview.CircleImageView
 
 
 class FeedRecyclerViewAdapter(
-    private val values: List<Post>,
+    private val values: List<Tweet>,
     private val onRetweetActionClick: (String) -> Unit
 ) : RecyclerView.Adapter<FeedRecyclerViewAdapter.ViewHolder>() {
 

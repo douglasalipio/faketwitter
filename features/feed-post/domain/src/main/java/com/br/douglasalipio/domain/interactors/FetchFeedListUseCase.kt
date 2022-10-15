@@ -1,10 +1,9 @@
 package com.br.douglasalipio.domain.interactors
 
-import com.br.douglasalipio.domain.PosterRepository
-import com.br.douglasalipio.domain.entities.Post
+import com.br.douglasalipio.domain.PosterFeedRepository
 import com.br.douglasalipio.domain.states.PosterListState
 
-class FetchFeedUseCase(private val repository: PosterRepository) {
+class FetchFeedListUseCase(private val repository: PosterFeedRepository) {
 
     suspend fun execute(): PosterListState {
         val posts = repository.fetchFeed()

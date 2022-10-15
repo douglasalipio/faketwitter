@@ -1,10 +1,10 @@
 package com.br.douglasalipio.presentation.di
 
-import com.br.douglasalipio.data.PosterDataSource
-import com.br.douglasalipio.data.PosterDataSourceImp
-import com.br.douglasalipio.data.PosterRepositoryImp
-import com.br.douglasalipio.data.local.PosterLocalStorage
-import com.br.douglasalipio.domain.PosterRepository
+import com.br.douglasalipio.data.PosterFeedDataSource
+import com.br.douglasalipio.data.PosterFeedDataSourceImp
+import com.br.douglasalipio.data.PosterFeedRepositoryImp
+import com.br.douglasalipio.data.local.PosterFeedLocalStorage
+import com.br.douglasalipio.domain.PosterFeedRepository
 import com.br.douglasalipio.domain.interactors.*
 import com.br.douglasalipio.presentation.components.tweet.TwitteViewModel
 import com.br.douglasalipio.presentation.components.feed.FeedViewModel
@@ -19,14 +19,14 @@ object PosterFeedModule {
         viewModel { ProfileViewModel(get(), get()) }
     }
     val dataModule = module {
-        single<PosterDataSource> { PosterDataSourceImp(PosterLocalStorage()) }
-        single<PosterRepository> { PosterRepositoryImp(get()) }
+        single<PosterFeedDataSource> { PosterFeedDataSourceImp(PosterFeedLocalStorage()) }
+        single<PosterFeedRepository> { PosterFeedRepositoryImp(get()) }
     }
     val domainModule = module {
-        factory { FetchFeedUseCase(get()) }
-        factory { GetDefaultUserProfileUseCase(get()) }
-        factory { GetTotalUserPostsUseCase(get()) }
+        factory { FetchFeedListUseCase(get()) }
+        factory { GetDefaultProfileUseCase(get()) }
+        factory { GetTotalUserTweetsUseCase(get()) }
         factory { GetAllUserNamesUseCase(get()) }
-        factory { PostContentUserCase(get()) }
+        factory { TweetContentUserCase(get()) }
     }
 }

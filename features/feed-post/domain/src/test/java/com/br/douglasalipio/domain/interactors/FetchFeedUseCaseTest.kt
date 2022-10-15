@@ -1,7 +1,7 @@
 package com.br.douglasalipio.domain.interactors
 
-import com.br.douglasalipio.domain.PosterRepository
-import com.br.douglasalipio.domain.entities.Post
+import com.br.douglasalipio.domain.PosterFeedRepository
+import com.br.douglasalipio.domain.entities.Tweet
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -15,24 +15,24 @@ import org.junit.Test
 class FetchFeedUseCaseTest {
 
     @MockK
-    private lateinit var mockRepository: PosterRepository
+    private lateinit var mockRepository: PosterFeedRepository
 
-    private lateinit var fetchFeedUseCase: FetchFeedUseCase
+    private lateinit var fetchFeedListUseCase: FetchFeedListUseCase
 
     @Before
     fun setUp() {
          MockKAnnotations.init(this)
-        fetchFeedUseCase = FetchFeedUseCase(mockRepository)
+        fetchFeedListUseCase = FetchFeedListUseCase(mockRepository)
     }
 
 
     @Test
     fun `WHEN fetch feed use case is called THEN return post list`() = runBlockingTest{
         //given
-        val posts = listOf<Post>()
-        coEvery { mockRepository.fetchFeed() } returns posts
+        val tweets = listOf<Tweet>()
+        coEvery { mockRepository.fetchFeed() } returns tweets
         //when
-        val actualPostResult = fetchFeedUseCase.execute()
-        Assert.assertEquals(posts, actualPostResult)
+        val actualPostResult = fetchFeedListUseCase.execute()
+        Assert.assertEquals(tweets, actualPostResult)
     }
 }

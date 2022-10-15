@@ -1,40 +1,39 @@
 package com.br.douglasalipio.domain.interactors
 
-import com.br.douglasalipio.domain.PosterRepository
-import com.br.douglasalipio.domain.entities.UserProfile
-import com.br.douglasalipio.domain.states.UserProfileState
+import com.br.douglasalipio.domain.PosterFeedRepository
+import com.br.douglasalipio.domain.entities.Profile
+import com.br.douglasalipio.domain.states.ProfileState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetDefaultUserProfileUserCaseTest {
+class GetDefaultUserProfileCaseTest {
 
     @MockK
-    private lateinit var mockRepository: PosterRepository
+    private lateinit var mockRepository: PosterFeedRepository
 
-    private lateinit var getDefaultUserProfile: GetDefaultUserProfileUseCase
+    private lateinit var getDefaultUserProfile: GetDefaultProfileUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        getDefaultUserProfile = GetDefaultUserProfileUseCase(mockRepository)
+        getDefaultUserProfile = GetDefaultProfileUseCase(mockRepository)
     }
 
 
     @Test
     fun `WHEN get default user profile is called THEN return default user`() = runTest {
         //given
-        val user = UserProfile(1, "username", "joinedDate", 0)
+        val user = Profile(1, "username", "joinedDate", "imageName")
         coEvery { mockRepository.getDefaultUserProfile() } returns user
         //when
         val actualUserProfileState = getDefaultUserProfile.execute()
-        assertEquals(UserProfileState.Loaded(user), actualUserProfileState)
+        assertEquals(ProfileState.Loaded(user), actualUserProfileState)
     }
 }

@@ -3,29 +3,29 @@ package com.br.douglasalipio.presentation.components.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.douglasalipio.domain.interactors.GetDefaultUserProfileUseCase
-import com.br.douglasalipio.domain.interactors.GetTotalUserPostsUseCase
-import com.br.douglasalipio.domain.states.TotalPostsState
-import com.br.douglasalipio.domain.states.UserProfileState
+import com.br.douglasalipio.domain.interactors.GetDefaultProfileUseCase
+import com.br.douglasalipio.domain.interactors.GetTotalUserTweetsUseCase
+import com.br.douglasalipio.domain.states.TotalTweetsState
+import com.br.douglasalipio.domain.states.ProfileState
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-    private val getDefaultUserProfile: GetDefaultUserProfileUseCase,
-    private val getTotalUserPostsUseCase: GetTotalUserPostsUseCase
+    private val getDefaultUserProfile: GetDefaultProfileUseCase,
+    private val getTotalUserTweetsUseCase: GetTotalUserTweetsUseCase
 ) : ViewModel() {
 
     val viewState = MutableLiveData<ProfileViewState>()
-    val totalPostsViewState = MutableLiveData<TotalPostsState>()
+    val totalPostsViewState = MutableLiveData<TotalTweetsState>()
 
     fun loadUserProfile() {
         viewModelScope.launch {
 
             getDefaultUserProfile.execute().let { userProfileState ->
                 when (userProfileState) {
-                    is UserProfileState.LoadFail -> viewState.value =
+                    is ProfileState.LoadFail -> viewState.value =
                         ProfileViewState.LoadFail
 
-                    is UserProfileState.Loaded -> viewState.value =
+                    is ProfileState.Loaded -> viewState.value =
                         ProfileViewState.Loaded(userProfileState.defaultUser)
                     else -> {}
                 }
@@ -34,16 +34,16 @@ class ProfileViewModel(
     }
 
     fun loadUserTotalPosts(userId: Int) {
-        val params = GetTotalUserPostsUseCase.Params(userId)
+        val params = GetTotalUserTweetsUseCase.Params(userId)
 
         viewModelScope.launch {
-            getTotalUserPostsUseCase.execute(params).let { totalPostsState ->
+            getTotalUserTweetsUseCase.execute(params).let { totalPostsState ->
                 when (totalPostsState) {
-                    is TotalPostsState.Loaded -> {
+                    is TotalTweetsState.Loaded -> {
                         viewState.value =
                             ProfileViewState.TotalLoaded(totalPostsState.value)
                     }
-                    is TotalPostsState.LoadFail -> {
+                    is TotalTweetsState.LoadFail -> {
                         viewState.value = ProfileViewState.LoadFail
                     }
                 }

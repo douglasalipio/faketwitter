@@ -2,12 +2,10 @@ package com.br.douglasalipio.data
 
 import com.br.douglasalipio.data.local.mapToData
 import com.br.douglasalipio.data.local.mapToDomain
-import com.br.douglasalipio.data.local.models.PostModel
-import com.br.douglasalipio.domain.PosterRepository
-import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.domain.entities.UserProfile
+import com.br.douglasalipio.domain.PosterFeedRepository
+import com.br.douglasalipio.domain.entities.Tweet
 
-class PosterRepositoryImp(private val dataSource: PosterDataSource) : PosterRepository {
+class PosterFeedRepositoryImp(private val dataSource: PosterFeedDataSource) : PosterFeedRepository {
 
     override suspend fun getUserById(userId: Int) = dataSource.getUserById(userId).mapToDomain()
 
@@ -19,8 +17,8 @@ class PosterRepositoryImp(private val dataSource: PosterDataSource) : PosterRepo
 
     override suspend fun getTotalUserPosts(userId: Int) = dataSource.getTotalUserPosts(userId)
 
-    override suspend fun postContent(post: Post): List<Post> {
-        val newPostList = dataSource.postContent(post.mapToData())
+    override suspend fun postContent(tweet: Tweet): List<Tweet> {
+        val newPostList = dataSource.postContent(tweet.mapToData())
         return newPostList.map { it.mapToDomain() }
     }
 

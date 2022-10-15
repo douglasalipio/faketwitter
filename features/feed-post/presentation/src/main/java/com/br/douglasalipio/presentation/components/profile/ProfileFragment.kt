@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.br.douglasalipio.domain.entities.UserProfile
+import com.br.douglasalipio.domain.entities.Profile
 import com.br.douglasalipio.presentation.R
 import com.br.douglasalipio.presentation.databinding.ProfileFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
                 is ProfileViewState.LoadFail -> {}
                 is ProfileViewState.TotalLoaded -> showTotalUserPosts(state.value)
                 is ProfileViewState.Loaded -> {
-                    showUserProfile(state.defaultUserProfile)
+                    showUserProfile(state.defaultProfile)
                     viewModel.loadUserTotalPosts(0)
                 }
             }
@@ -37,8 +37,8 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         viewBinding.totalPosts.text = value.toString()
     }
 
-    private fun showUserProfile(userProfile: UserProfile) {
-        viewBinding.joinedDate.text = userProfile.dateJoined
-        viewBinding.userName.text = userProfile.username
+    private fun showUserProfile(profile: Profile) {
+        viewBinding.joinedDate.text = profile.dateJoined
+        viewBinding.userName.text = profile.username
     }
 }
