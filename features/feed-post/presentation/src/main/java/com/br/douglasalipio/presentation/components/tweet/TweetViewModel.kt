@@ -11,7 +11,7 @@ import com.br.douglasalipio.domain.states.GetAllUsernamesState
 import com.br.douglasalipio.domain.states.ProfileState
 import kotlinx.coroutines.launch
 
-class TwitteViewModel(
+class TweetViewModel(
     private val getDefaultProfileUseCase: GetDefaultProfileUseCase,
     private val getAllUserNamesUseCase: GetAllUserNamesUseCase,
     private val tweetContentUserCase: TweetContentUserCase
