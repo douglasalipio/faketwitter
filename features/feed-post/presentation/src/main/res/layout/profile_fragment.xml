@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/design_default_color_primary"
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -32,7 +33,7 @@
             android:ellipsize="end"
             android:paddingStart="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             pocketBlog:autoSizeStepGranularity="1sp"
             pocketBlog:layout_constraintStart_toEndOf="@+id/userProfile"
             pocketBlog:layout_constraintTop_toTopOf="parent"
@@ -45,7 +46,7 @@
             android:ellipsize="end"
             android:paddingStart="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             pocketBlog:autoSizeStepGranularity="1sp"
             pocketBlog:layout_constraintBottom_toBottomOf="parent"
             pocketBlog:layout_constraintStart_toEndOf="@+id/userProfile"
@@ -59,7 +60,7 @@
             android:ellipsize="end"
             android:paddingStart="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             pocketBlog:autoSizeStepGranularity="1sp"
             pocketBlog:layout_constraintBottom_toBottomOf="parent"
 

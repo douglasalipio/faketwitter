@@ -6,6 +6,9 @@ import com.br.douglasalipio.domain.entities.Post
 import com.br.douglasalipio.domain.entities.UserProfile
 
 fun PostModel.mapToDomain() = Post(content = this.content, user = this.user.mapToDomain())
+fun Post.mapToData() = PostModel(this.content, this.user.mapToData())
+fun UserProfile.mapToData() =
+    UserProfileModel(this.id, this.username, this.dateJoined, this.imageName)
 
 fun UserProfileModel.mapToDomain() = UserProfile(
     id = this.id,

@@ -1,4 +1,4 @@
-package com.br.douglasalipio.presentation.components.viewmodels
+package com.br.douglasalipio.presentation.components.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,15 +7,14 @@ import com.br.douglasalipio.domain.interactors.GetDefaultUserProfileUseCase
 import com.br.douglasalipio.domain.interactors.GetTotalUserPostsUseCase
 import com.br.douglasalipio.domain.states.TotalPostsState
 import com.br.douglasalipio.domain.states.UserProfileState
-import com.br.douglasalipio.presentation.components.states.UserProfileFragmentState
 import kotlinx.coroutines.launch
 
-class UserProfileViewModel(
+class ProfileViewModel(
     private val getDefaultUserProfile: GetDefaultUserProfileUseCase,
     private val getTotalUserPostsUseCase: GetTotalUserPostsUseCase
 ) : ViewModel() {
 
-    val viewState = MutableLiveData<UserProfileFragmentState>()
+    val viewState = MutableLiveData<ProfileViewState>()
     val totalPostsViewState = MutableLiveData<TotalPostsState>()
 
     fun loadUserProfile() {
@@ -24,10 +23,10 @@ class UserProfileViewModel(
             getDefaultUserProfile.execute().let { userProfileState ->
                 when (userProfileState) {
                     is UserProfileState.LoadFail -> viewState.value =
-                        UserProfileFragmentState.LoadFail
+                        ProfileViewState.LoadFail
 
                     is UserProfileState.Loaded -> viewState.value =
-                        UserProfileFragmentState.Loaded(userProfileState.defaultUser)
+                        ProfileViewState.Loaded(userProfileState.defaultUser)
                     else -> {}
                 }
             }
@@ -42,10 +41,10 @@ class UserProfileViewModel(
                 when (totalPostsState) {
                     is TotalPostsState.Loaded -> {
                         viewState.value =
-                            UserProfileFragmentState.TotalUserLoaded(totalPostsState.value)
+                            ProfileViewState.TotalLoaded(totalPostsState.value)
                     }
                     is TotalPostsState.LoadFail -> {
-                        viewState.value = UserProfileFragmentState.LoadFail
+                        viewState.value = ProfileViewState.LoadFail
                     }
                 }
             }

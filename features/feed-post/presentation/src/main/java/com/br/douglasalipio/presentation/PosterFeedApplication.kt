@@ -1,13 +1,13 @@
 package com.br.douglasalipio.presentation
 
 import android.app.Application
-import com.br.douglasalipio.presentation.di.PosterModule
+import com.br.douglasalipio.presentation.di.PosterFeedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class PosterApplication : Application() {
+class PosterFeedApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,11 +17,11 @@ class PosterApplication : Application() {
     private fun startKoin() {
         startKoin {
             androidLogger(level = Level.ERROR)
-            androidContext(this@PosterApplication)
+            androidContext(this@PosterFeedApplication)
             modules(
-                PosterModule.dataModule,
-                PosterModule.domainModule,
-                PosterModule.presentationModule
+                PosterFeedModule.dataModule,
+                PosterFeedModule.domainModule,
+                PosterFeedModule.presentationModule
             )
 
         }

@@ -1,10 +1,7 @@
 package com.br.douglasalipio.data
 
-import com.br.douglasalipio.data.local.PosterLocalStorage
 import com.br.douglasalipio.data.local.models.PostModel
 import com.br.douglasalipio.data.local.models.UserProfileModel
-import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.domain.entities.UserProfile
 
 interface PosterDataSource {
 
@@ -17,4 +14,6 @@ interface PosterDataSource {
     suspend fun getDefaultUserProfile(): UserProfileModel
 
     suspend fun getTotalUserPosts(userId: Int) : Int
+
+    suspend fun postContent(postModel: PostModel): List<PostModel>
 }

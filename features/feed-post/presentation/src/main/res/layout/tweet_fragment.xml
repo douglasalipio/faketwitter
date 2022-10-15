@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".components.screens.PostContentBottomSheet">
+    tools:context=".components.tweet.TweetFragment">
 
     <AutoCompleteTextView
         android:id="@+id/postContentAutocompleteText"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Post"
+        android:text="Tweet"
         app:layout_constraintTop_toBottomOf="@+id/postContentAutocompleteText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

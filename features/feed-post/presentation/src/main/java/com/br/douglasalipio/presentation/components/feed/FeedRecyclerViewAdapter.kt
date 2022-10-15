@@ -1,4 +1,4 @@
-package com.br.douglasalipio.presentation.components.viewAdapters
+package com.br.douglasalipio.presentation.components.feed
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.presentation.databinding.PosterFragmentItemBinding
+import com.br.douglasalipio.presentation.databinding.FeedFragmentItemBinding
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class PosterRecyclerViewAdapter(
+class FeedRecyclerViewAdapter(
     private val values: List<Post>,
     private val onRetweetActionClick: (String) -> Unit
-) : RecyclerView.Adapter<PosterRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<FeedRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            PosterFragmentItemBinding.inflate(
+            FeedFragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -47,7 +47,7 @@ class PosterRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: PosterFragmentItemBinding) :
+    inner class ViewHolder(binding: FeedFragmentItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val userNameText: TextView = binding.userNameText
         val contentView: TextView = binding.content

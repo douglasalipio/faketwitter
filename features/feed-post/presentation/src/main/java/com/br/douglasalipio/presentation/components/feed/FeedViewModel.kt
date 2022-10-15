@@ -1,16 +1,15 @@
-package com.br.douglasalipio.presentation.components.viewmodels
+package com.br.douglasalipio.presentation.components.feed
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.douglasalipio.domain.interactors.FetchFeedUseCase
 import com.br.douglasalipio.domain.states.PosterListState
-import com.br.douglasalipio.presentation.components.states.PosterListFragmentState
 import kotlinx.coroutines.launch
 
-class PosterViewModel(private val fetchFeedUseCase: FetchFeedUseCase) : ViewModel() {
+class FeedViewModel(private val fetchFeedUseCase: FetchFeedUseCase) : ViewModel() {
 
-    val viewState = MutableLiveData<PosterListFragmentState>()
+    val viewState = MutableLiveData<FeedViewState>()
 
     fun loadFeedList() {
         viewModelScope.launch {
@@ -18,10 +17,10 @@ class PosterViewModel(private val fetchFeedUseCase: FetchFeedUseCase) : ViewMode
             fetchFeedUseCase.execute().let { posterListState ->
                 when (posterListState) {
                     is PosterListState.LoadFail -> viewState.value =
-                        PosterListFragmentState.LoadFail
+                        FeedViewState.LoadFail
 
                     is PosterListState.Loaded -> viewState.value =
-                        PosterListFragmentState.Loaded(posterListState.posts)
+                        FeedViewState.Loaded(posterListState.posts)
                 }
             }
         }

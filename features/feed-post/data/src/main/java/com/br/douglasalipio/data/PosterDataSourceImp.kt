@@ -2,8 +2,6 @@ package com.br.douglasalipio.data
 
 import com.br.douglasalipio.data.local.PosterLocalStorage
 import com.br.douglasalipio.data.local.models.PostModel
-import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.domain.entities.UserProfile
 
 class PosterDataSourceImp(private val posterLocalStorage: PosterLocalStorage) : PosterDataSource {
 
@@ -18,4 +16,6 @@ class PosterDataSourceImp(private val posterLocalStorage: PosterLocalStorage) : 
     override suspend fun getTotalUserPosts(userId: Int) =
         posterLocalStorage.getTotalPostByUser(userId)
 
+    override suspend fun postContent(postModel: PostModel) =
+        posterLocalStorage.postContent(postModel)
 }

@@ -15,4 +15,6 @@ interface PosterRepository {
 
     suspend fun getTotalUserPosts(userId: Int): Int
 
+    suspend fun postContent(post: Post): List<Post>
+
 }

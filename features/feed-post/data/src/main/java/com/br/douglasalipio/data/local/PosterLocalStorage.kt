@@ -1,9 +1,9 @@
 package com.br.douglasalipio.data.local
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.br.douglasalipio.data.local.models.PostModel
 import com.br.douglasalipio.data.local.models.UserProfileModel
-import com.br.douglasalipio.domain.entities.Post
-import com.br.douglasalipio.domain.entities.UserProfile
 
 class PosterLocalStorage {
 
@@ -59,11 +59,12 @@ class PosterLocalStorage {
             )
         )
 
+
     }
 
     fun getAllNames() = users.map { it.username }
 
-    fun getTotalPostByUser(userId: Int) = users.filter { it.id == userId }.size
+    fun getTotalPostByUser(userId: Int) = posts.filter { it.user.id == userId }.size
 
     fun getUserById(userId: Int) = users[userId]
 
@@ -71,4 +72,8 @@ class PosterLocalStorage {
 
     fun getDefaultUserProfile() = users[0]
 
+    fun postContent(postModel: PostModel): List<PostModel> {
+        posts.add(postModel)
+        return posts.toList()
+    }
 }

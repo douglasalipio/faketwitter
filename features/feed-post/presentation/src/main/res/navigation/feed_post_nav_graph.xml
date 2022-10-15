@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/posterFragmentListView"
-        android:name="com.br.douglasalipio.presentation.components.screens.PosterListFragment"
+        android:name="com.br.douglasalipio.presentation.components.feed.FeedListFragment"
         tools:layout="@layout/poster_fragment_list">
 
         <action
@@ -17,7 +17,13 @@
 
     <dialog
         android:id="@+id/bottom_sheet_dialog"
-        android:name="com.br.douglasalipio.presentation.components.screens.PostContentBottomSheet"
-        tools:layout="@layout/post_content_fragment" />
+        android:name="com.br.douglasalipio.presentation.components.tweet.TweetFragment"
+        tools:layout="@layout/tweet_fragment">
+
+
+        <action
+            android:id="@+id/action_bottom_sheet_dialog_to_feedPostNav"
+            app:destination="@id/feedPostNav" />
+    </dialog>
 
 </navigation>
