@@ -1,15 +1,15 @@
 package com.br.douglasalipio.domain.interactors
 
 import com.br.douglasalipio.domain.PosterFeedRepository
-import com.br.douglasalipio.domain.states.PosterListState
+import com.br.douglasalipio.domain.states.FeedListState
 
 class FetchFeedListUseCase(private val repository: PosterFeedRepository) {
 
-    suspend fun execute(): PosterListState {
+    suspend fun execute(): FeedListState {
         val posts = repository.fetchFeed()
         if (posts.isEmpty())
-            return PosterListState.LoadFail
+            return FeedListState.Fail
 
-        return PosterListState.Loaded(posts)
+        return FeedListState.Loaded(posts)
     }
 }

@@ -16,5 +16,4 @@ interface PosterFeedRepository {
     suspend fun getTotalUserPosts(userId: Int): Int
 
     suspend fun postContent(tweet: Tweet): List<Tweet>
-
 }

@@ -1,6 +1,9 @@
-package com.br.douglasalipio.presentation.components.tweet
+package com.br.douglasalipio.presentation.components.post
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +15,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.br.douglasalipio.presentation.R
 
 import com.br.douglasalipio.presentation.databinding.TweetFragmentBinding
+import com.br.douglasalipio.presentation.utils.SpaceTokenizer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TweetFragment : BottomSheetDialogFragment() {
+class PostFragment : BottomSheetDialogFragment() {
 
     private val viewBiding by viewBinding(TweetFragmentBinding::bind)
-    private val viewModel: TweetViewModel by viewModel()
-    private val args: TweetFragmentArgs by navArgs()
+    private val viewModel: PostViewModel by viewModel()
+    private val args: PostFragmentArgs by navArgs()
+    private val threshold = 700
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,18 +37,41 @@ class TweetFragment : BottomSheetDialogFragment() {
         viewModel.getAllUsernames()
         setUpEvents()
         setUpPostContentButton()
+        setUpAutoCompleteContentText()
     }
 
     private fun setUpEvents() {
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is TweetViewState.UsernamesLoadFail -> {}
-                is TweetViewState.UsernamesLoaded -> setUpAutocompleteUsername(state.usernames)
+                is PostViewState.UsernamesLoadFail -> {}
+                is PostViewState.UsernamesLoaded -> setUpAutocompleteTagUserProfile(state.usernames)
             }
         }
     }
 
-    private fun setUpAutocompleteUsername(usernames: List<String>) {
+    private fun setUpAutoCompleteContentText() {
+        viewBiding.postContentAutocompleteText.filters =
+            arrayOf(InputFilter.LengthFilter(threshold))
+        viewBiding.postContentAutocompleteText.setTokenizer(SpaceTokenizer())
+        viewBiding.postContentAutocompleteText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                text: CharSequence?, start: Int, before: Int, count: Int
+            ) {
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                viewBiding.countdownText.text =
+                    "${threshold - editable.toString().length} /$threshold"
+
+            }
+
+        })
+    }
+
+    private fun setUpAutocompleteTagUserProfile(usernames: List<String>) {
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_dropdown_item_1line, usernames
         )
@@ -62,22 +90,16 @@ class TweetFragment : BottomSheetDialogFragment() {
 
     private fun postContent() {
         val post = viewBiding.postContentAutocompleteText.text.toString()
-        val content = "$post \n\n--------------\n\n ${args.retweetContent}"
-        viewModel.requestPostContent(content)
+        val content = "$post\n----------\n ${args.rePostingContent}"
+        if (args.rePostingContent.isEmpty())
+            viewModel.requestPostContent(post, false, args.itemPosition)
+        else
+            viewModel.requestPostContent(content, true, args.itemPosition)
         dismiss()
         navigateBackToPostListScreen()
     }
 
     private fun navigateBackToPostListScreen() {
-        val retweetContent = Bundle().apply {
-            putString(
-                RETWEET_CONTENT_KEY, viewBiding.postContentAutocompleteText.toString()
-            )
-        }
-        findNavController().navigate(R.id.action_bottom_sheet_dialog_to_feedPostNav, retweetContent)
-    }
-
-    companion object {
-        const val RETWEET_CONTENT_KEY = "retweet_content_bundle"
+        findNavController().navigate(R.id.action_bottom_sheet_dialog_to_feedPostNav)
     }
 }

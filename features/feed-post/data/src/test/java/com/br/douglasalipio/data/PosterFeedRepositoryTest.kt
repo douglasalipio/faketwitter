@@ -1,5 +1,6 @@
 package com.br.douglasalipio.data
 
+import com.br.douglasalipio.data.local.PosterFeedLocalStorage
 import com.br.douglasalipio.data.local.models.TweetModel
 import com.br.douglasalipio.data.local.models.ProfileModel
 import com.br.douglasalipio.domain.PosterFeedRepository
@@ -16,45 +17,45 @@ import org.junit.Test
 class PosterFeedRepositoryTest {
 
     @MockK
-    private lateinit var dataSource: PosterFeedDataSource
+    private lateinit var localStorage: PosterFeedLocalStorage
     private lateinit var repository: PosterFeedRepository
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        repository = PosterFeedRepositoryImp(dataSource)
+        repository = PosterFeedRepositoryImp(localStorage)
     }
 
     @Test
     fun `WHEN fetch feed list is called THEN returns post list`() {
         //given
         val posts = listOf<TweetModel>()
-        coEvery { dataSource.fetchFeed() } returns posts
+        coEvery { localStorage.fetchFeed() } returns posts
         //when
         val domainPosts = runTest { repository.fetchFeed() }
         //then
-        coVerify { dataSource.fetchFeed() }
+        coVerify { localStorage.fetchFeed() }
     }
 
     @Test
     fun `GIVEN user id WHEN get user is called THEN returns user`() = runTest {
         //given
         val userProfile = ProfileModel(1, "username", "April 25, 2021", "local_image")
-        coEvery { dataSource.getUserById(1) } returns userProfile
+        coEvery { localStorage.getUserById(1) } returns userProfile
         //when
         val domainUser = repository.getUserById(1)
         //then
-        coVerify { dataSource.getUserById(1) }
+        coVerify { localStorage.getUserById(1) }
     }
 
     @Test
     fun `WHEN get default user is called THEN returns user`() = runTest {
         //given
         val userProfile = ProfileModel(1, "username", "April 25, 2021", "local_image")
-        coEvery { dataSource.getDefaultUserProfile() } returns userProfile
+        coEvery { localStorage.getDefaultUserProfile() } returns userProfile
         //when
         val domainUser = repository.getDefaultUserProfile()
         //then
-        coVerify { dataSource.getDefaultUserProfile() }
+        coVerify { localStorage.getDefaultUserProfile() }
     }
 }

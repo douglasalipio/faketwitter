@@ -1,3 +1,7 @@
 package com.br.douglasalipio.domain.entities
 
-data class Tweet(val content: String, val user : Profile)
+data class Tweet(
+    val content: String,
+    val user: Profile,
+    val hasRepost: Boolean
+)

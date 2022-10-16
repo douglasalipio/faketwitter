@@ -4,22 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".components.tweet.TweetFragment">
+    tools:context=".components.post.PostFragment">
 
-    <AutoCompleteTextView
+    <TextView
+        android:id="@+id/countdownText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <MultiAutoCompleteTextView
         android:id="@+id/postContentAutocompleteText"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:autofillHints="name"
         android:gravity="top|left"
         android:hint="Write your post"
-        android:inputType="textEmailAddress|textMultiLine"
+        android:inputType="textMultiLine"
         android:lines="20"
         android:minLines="5"
         android:scrollbars="vertical"
         android:scrollHorizontally="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/countdownText"
+        app:layout_constraintTop_toBottomOf="@+id/countdownText" />
 
 
     <androidx.appcompat.widget.AppCompatButton

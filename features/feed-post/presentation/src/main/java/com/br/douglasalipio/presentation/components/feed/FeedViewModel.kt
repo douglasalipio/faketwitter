@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.douglasalipio.domain.interactors.FetchFeedListUseCase
-import com.br.douglasalipio.domain.states.PosterListState
+import com.br.douglasalipio.domain.states.FeedListState
 import kotlinx.coroutines.launch
 
 class FeedViewModel(private val fetchFeedListUseCase: FetchFeedListUseCase) : ViewModel() {
@@ -16,13 +16,13 @@ class FeedViewModel(private val fetchFeedListUseCase: FetchFeedListUseCase) : Vi
 
             fetchFeedListUseCase.execute().let { posterListState ->
                 when (posterListState) {
-                    is PosterListState.LoadFail -> viewState.value =
-                        FeedViewState.LoadFail
+                    is FeedListState.Fail -> viewState.value = FeedViewState.LoadFail
 
-                    is PosterListState.Loaded -> viewState.value =
+                    is FeedListState.Loaded -> viewState.value =
                         FeedViewState.Loaded(posterListState.tweets)
                 }
             }
         }
     }
+
 }

@@ -39,20 +39,24 @@ class PosterFeedLocalStorage {
         posts.addAll(
             listOf(
                 TweetModel(
-                    content = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
-                    user = users[0]
+                    content = "Hey folks, how are you?",
+                    user = users[0],
+                    hasRepost = false
                 ), TweetModel(
-                    content = "Graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
-                    user = users[1]
+                    content = "Good morning everyone!",
+                    user = users[1],
+                    hasRepost = false
                 ),
                 TweetModel(
                     content =
-                    "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual",
-                    user = users[2]
+                    "I have no idea whats going on wit my computer lol",
+                    user = users[2],
+                    hasRepost = false
                 ),
                 TweetModel(
-                    content = "In publishing and graphic design, Lorem ipsum is a placeholder text",
-                    user = users[3]
+                    content = "Happy new year!!!",
+                    user = users[3],
+                    hasRepost = false
                 )
             )
         )
@@ -64,7 +68,9 @@ class PosterFeedLocalStorage {
 
     fun getTotalPostByUser(userId: Int) = posts.filter { it.user.id == userId }.size
 
-    fun getUserById(userId: Int) = users[userId]
+    fun getUserById(userId: Int): ProfileModel {
+        return users[userId]
+    }
 
     fun fetchFeed(): List<TweetModel> = posts
 

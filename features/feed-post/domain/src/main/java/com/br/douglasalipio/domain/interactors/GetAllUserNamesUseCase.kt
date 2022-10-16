@@ -8,7 +8,7 @@ class GetAllUserNamesUseCase(private val repository: PosterFeedRepository) {
     suspend fun execute(): GetAllUsernamesState {
         val usernames = repository.getAllNames()
         if (usernames.isEmpty())
-            return GetAllUsernamesState.LoadFail
+            return GetAllUsernamesState.Fail
 
         return GetAllUsernamesState.Loaded(usernames)
     }

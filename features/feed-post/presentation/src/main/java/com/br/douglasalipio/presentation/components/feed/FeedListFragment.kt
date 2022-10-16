@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.navigation.fragment.findNavController
+
 import com.br.douglasalipio.domain.entities.Tweet
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.br.douglasalipio.presentation.R
@@ -15,7 +16,7 @@ class FeedListFragment : Fragment(R.layout.poster_fragment_list) {
 
     private val viewBinding by viewBinding(PosterFragmentListBinding::bind)
     private val viewModel: FeedViewModel by viewModel()
-    private val onRetweetActionClick: (String) -> Unit = this::onRetweetActionClicked
+    private val onRetweetActionClick: (String, Int) -> Unit = this::onRetweetActionClicked
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,12 +38,17 @@ class FeedListFragment : Fragment(R.layout.poster_fragment_list) {
         viewBinding.postContentButton.setOnClickListener { navigateToPostContentBottomSheet() }
     }
 
-    private fun onRetweetActionClicked(value: String) {
-        //TODO
+    private fun onRetweetActionClicked(content: String, itemPosition: Int) {
+
+        navigateToPostContentBottomSheet(content, itemPosition)
     }
 
-    private fun navigateToPostContentBottomSheet() {
-        val action = FeedListFragmentDirections.actionPosterListFragmentToPostContentBottomSheet()
+    private fun navigateToPostContentBottomSheet(value: String = "", itemPosition: Int = 0) {
+        val action =
+            FeedListFragmentDirections.actionPosterListFragmentToPostContentBottomSheet(
+                value,
+                itemPosition
+            )
         findNavController().navigate(action)
     }
 

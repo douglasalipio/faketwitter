@@ -1,16 +1,16 @@
 package com.br.douglasalipio.domain.interactors
 
 import com.br.douglasalipio.domain.PosterFeedRepository
-import com.br.douglasalipio.domain.states.TotalTweetsState
+import com.br.douglasalipio.domain.states.TotalPostsState
 
 class GetTotalUserTweetsUseCase(private val repository: PosterFeedRepository) {
 
-    suspend fun execute(params: Params): TotalTweetsState {
+    suspend fun execute(params: Params): TotalPostsState {
         val totalPost = repository.getTotalUserPosts(params.userId)
         return try {
-            TotalTweetsState.Loaded(totalPost)
+            TotalPostsState.Loaded(totalPost)
         } catch (exception: Throwable) {
-            TotalTweetsState.LoadFail
+            TotalPostsState.Fail
         }
     }
 

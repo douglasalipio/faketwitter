@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.douglasalipio.domain.interactors.GetDefaultProfileUseCase
 import com.br.douglasalipio.domain.interactors.GetTotalUserTweetsUseCase
-import com.br.douglasalipio.domain.states.TotalTweetsState
+import com.br.douglasalipio.domain.states.TotalPostsState
 import com.br.douglasalipio.domain.states.ProfileState
 import kotlinx.coroutines.launch
 
@@ -15,7 +15,7 @@ class ProfileViewModel(
 ) : ViewModel() {
 
     val viewState = MutableLiveData<ProfileViewState>()
-    val totalPostsViewState = MutableLiveData<TotalTweetsState>()
+    val totalPostsViewState = MutableLiveData<TotalPostsState>()
 
     fun loadUserProfile() {
         viewModelScope.launch {
@@ -39,11 +39,11 @@ class ProfileViewModel(
         viewModelScope.launch {
             getTotalUserTweetsUseCase.execute(params).let { totalPostsState ->
                 when (totalPostsState) {
-                    is TotalTweetsState.Loaded -> {
+                    is TotalPostsState.Loaded -> {
                         viewState.value =
                             ProfileViewState.TotalLoaded(totalPostsState.value)
                     }
-                    is TotalTweetsState.LoadFail -> {
+                    is TotalPostsState.Fail -> {
                         viewState.value = ProfileViewState.LoadFail
                     }
                 }
