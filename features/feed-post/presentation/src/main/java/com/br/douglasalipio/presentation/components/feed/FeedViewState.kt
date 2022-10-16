@@ -1,9 +1,11 @@
 package com.br.douglasalipio.presentation.components.feed
 
-import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.domain.entities.Post
 
 sealed class FeedViewState {
 
-    object LoadFail : FeedViewState()
-    data class Loaded(val tweets: List<Tweet>) : FeedViewState()
+    object Fail : FeedViewState()
+    data class FeedListLoaded(val tweets: List<Post>) : FeedViewState()
+    object PostContentAllowed : FeedViewState()
+    object PostContentNotAllowed : FeedViewState()
 }

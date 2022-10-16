@@ -6,12 +6,12 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.br.douglasalipio.domain.entities.Profile
 import com.br.douglasalipio.presentation.R
-import com.br.douglasalipio.presentation.databinding.ProfileFragmentBinding
+import com.br.douglasalipio.presentation.databinding.UserProfileFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment(R.layout.user_profile_fragment) {
 
-    private val viewBinding by viewBinding(ProfileFragmentBinding::bind)
+    private val viewBinding by viewBinding(UserProfileFragmentBinding::bind)
     private val viewModel: ProfileViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,14 +27,16 @@ class ProfileFragment : Fragment(R.layout.user_profile_fragment) {
                 is ProfileViewState.TotalLoaded -> showTotalUserPosts(state.value)
                 is ProfileViewState.Loaded -> {
                     showUserProfile(state.defaultProfile)
-                    viewModel.loadUserTotalPosts(0)
+                    viewModel.loadCountNumbers()
                 }
             }
         }
     }
 
-    private fun showTotalUserPosts(value: Int) {
-        viewBinding.totalPosts.text = value.toString()
+    private fun showTotalUserPosts(value: List<Int>) {
+        viewBinding.totalPosts.text = value[0].toString()
+        viewBinding.totalQuotePosts.text = value[1].toString()
+        viewBinding.totalReposting.text = value[2].toString()
     }
 
     private fun showUserProfile(profile: Profile) {

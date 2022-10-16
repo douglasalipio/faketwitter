@@ -1,10 +1,10 @@
 package com.br.douglasalipio.data.local.mappers
 
-import com.br.douglasalipio.data.local.models.TweetModel
-import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.data.local.models.PostModel
+import com.br.douglasalipio.domain.entities.Post
 
-fun TweetModel.mapToDomain() =
-    Tweet(content = this.content, user = this.user.mapToDomain(), this.hasRepost)
+fun PostModel.mapToDomain() =
+    Post(content = this.content, user = this.user.mapToDomain(), this.postType)
 
-fun Tweet.mapToData() = TweetModel(this.content, this.user.mapToData(), this.hasRepost)
+fun Post.mapToData() = PostModel(this.content, this.user.mapToData(), this.postType)
 

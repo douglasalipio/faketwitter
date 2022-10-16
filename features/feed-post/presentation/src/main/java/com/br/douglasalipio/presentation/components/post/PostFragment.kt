@@ -12,16 +12,16 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.br.douglasalipio.domain.entities.PostType
 import com.br.douglasalipio.presentation.R
-
-import com.br.douglasalipio.presentation.databinding.TweetFragmentBinding
+import com.br.douglasalipio.presentation.databinding.PostContentFragmentBinding
 import com.br.douglasalipio.presentation.utils.SpaceTokenizer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostFragment : BottomSheetDialogFragment() {
 
-    private val viewBiding by viewBinding(TweetFragmentBinding::bind)
+    private val viewBiding by viewBinding(PostContentFragmentBinding::bind)
     private val viewModel: PostViewModel by viewModel()
     private val args: PostFragmentArgs by navArgs()
     private val threshold = 700
@@ -43,31 +43,32 @@ class PostFragment : BottomSheetDialogFragment() {
     private fun setUpEvents() {
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is PostViewState.UsernamesLoadFail -> {}
-                is PostViewState.UsernamesLoaded -> setUpAutocompleteTagUserProfile(state.usernames)
+                is PostViewState.UserLoadFail -> {}
+                is PostViewState.UserLoaded -> setUpAutocompleteTagUserProfile(state.usernames)
             }
         }
     }
 
     private fun setUpAutoCompleteContentText() {
+        //set up autocomplete after space character
         viewBiding.postContentAutocompleteText.filters =
             arrayOf(InputFilter.LengthFilter(threshold))
         viewBiding.postContentAutocompleteText.setTokenizer(SpaceTokenizer())
+
+        //Watch max character
         viewBiding.postContentAutocompleteText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 text: CharSequence?, start: Int, before: Int, count: Int
             ) {
             }
 
-            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(editable: Editable?) {
                 viewBiding.countdownText.text =
                     "${threshold - editable.toString().length} /$threshold"
 
             }
-
         })
     }
 
@@ -90,11 +91,11 @@ class PostFragment : BottomSheetDialogFragment() {
 
     private fun postContent() {
         val post = viewBiding.postContentAutocompleteText.text.toString()
-        val content = "$post\n----------\n ${args.rePostingContent}"
-        if (args.rePostingContent.isEmpty())
-            viewModel.requestPostContent(post, false, args.itemPosition)
+        val content = "$post\n----------\n ${args.content}"
+        if (args.content.isEmpty())
+            viewModel.requestPostContent(post, args.postType)
         else
-            viewModel.requestPostContent(content, true, args.itemPosition)
+            viewModel.requestPostContent(content, args.postType)
         dismiss()
         navigateBackToPostListScreen()
     }

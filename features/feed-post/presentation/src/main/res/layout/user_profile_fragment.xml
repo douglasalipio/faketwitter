@@ -31,12 +31,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:lines="1"
+            android:maxLength="14"
             android:paddingStart="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@android:color/white"
+            android:textSize="17sp"
             pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintBottom_toBottomOf="@+id/userProfile"
             pocketBlog:layout_constraintStart_toEndOf="@+id/userProfile"
-            pocketBlog:layout_constraintTop_toTopOf="parent"
+            pocketBlog:layout_constraintTop_toTopOf="@+id/userProfile"
             tools:text="douglasalipio" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -49,9 +53,71 @@
             android:textColor="@android:color/white"
             pocketBlog:autoSizeStepGranularity="1sp"
             pocketBlog:layout_constraintBottom_toBottomOf="parent"
-            pocketBlog:layout_constraintStart_toEndOf="@+id/userProfile"
-            pocketBlog:layout_constraintTop_toBottomOf="@+id/userName"
+            pocketBlog:layout_constraintEnd_toEndOf="parent"
             tools:text="March 25, 2021" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalRepostingText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:text="Reposts"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/white"
+            pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintStart_toStartOf="parent"
+            pocketBlog:layout_constraintTop_toBottomOf="@+id/userProfile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalReposting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/white"
+            pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintBottom_toBottomOf="@+id/totalRepostingText"
+            pocketBlog:layout_constraintStart_toEndOf="@+id/totalRepostingText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalQuotePostsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Quote Posts"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/white"
+            pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintStart_toStartOf="@+id/totalRepostingText"
+            pocketBlog:layout_constraintTop_toBottomOf="@+id/totalRepostingText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalPostsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Posts"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/white"
+            pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintStart_toStartOf="@+id/totalQuotePostsText"
+            pocketBlog:layout_constraintTop_toBottomOf="@+id/totalQuotePostsText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalQuotePosts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/white"
+            pocketBlog:autoSizeStepGranularity="1sp"
+            pocketBlog:layout_constraintStart_toEndOf="@+id/totalQuotePostsText"
+            pocketBlog:layout_constraintTop_toTopOf="@+id/totalQuotePostsText" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/totalPosts"
@@ -59,14 +125,12 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:paddingStart="15dp"
+            android:text="0"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@android:color/white"
             pocketBlog:autoSizeStepGranularity="1sp"
-            pocketBlog:layout_constraintBottom_toBottomOf="parent"
-
-            pocketBlog:layout_constraintEnd_toEndOf="parent"
-            pocketBlog:layout_constraintTop_toTopOf="parent"
-            tools:text="35" />
+            pocketBlog:layout_constraintStart_toEndOf="@+id/totalPostsText"
+            pocketBlog:layout_constraintTop_toTopOf="@+id/totalPostsText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

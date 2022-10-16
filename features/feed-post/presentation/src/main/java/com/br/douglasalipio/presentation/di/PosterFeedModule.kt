@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 object PosterFeedModule {
     val presentationModule = module {
-        viewModel { FeedViewModel(get()) }
+        viewModel { FeedViewModel(get(), get()) }
         viewModel { PostViewModel(get(), get()) }
         viewModel { ProfileViewModel(get(), get()) }
     }
@@ -22,8 +22,9 @@ object PosterFeedModule {
     val domainModule = module {
         factory { FetchFeedListUseCase(get()) }
         factory { GetDefaultProfileUseCase(get()) }
-        factory { GetTotalUserTweetsUseCase(get()) }
+        factory { GetTotalUserPostsUseCase(get()) }
         factory { GetAllUserNamesUseCase(get()) }
+        factory { GetCountNumbersUseCase(get()) }
         factory { PostUserCase(get()) }
     }
 }

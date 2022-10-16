@@ -4,7 +4,7 @@ import com.br.douglasalipio.data.local.PosterFeedLocalStorage
 import com.br.douglasalipio.data.local.mappers.mapToData
 import com.br.douglasalipio.data.local.mappers.mapToDomain
 import com.br.douglasalipio.domain.PosterFeedRepository
-import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.domain.entities.Post
 
 class PosterFeedRepositoryImp(private val localRepository: PosterFeedLocalStorage) :
     PosterFeedRepository {
@@ -19,10 +19,12 @@ class PosterFeedRepositoryImp(private val localRepository: PosterFeedLocalStorag
     override suspend fun getDefaultUserProfile() =
         localRepository.getDefaultUserProfile().mapToDomain()
 
-    override suspend fun getTotalUserPosts(userId: Int) = localRepository.getTotalPostByUser(userId)
+    override suspend fun getCountNumbers() = localRepository.getTotalCountNumbers()
 
-    override suspend fun postContent(tweet: Tweet): List<Tweet> {
-        val newPostList = localRepository.postContent(tweet.mapToData())
+    override suspend fun getTotalPosts() = localRepository.getTotalPosts()
+
+    override suspend fun postContent(content: Post): List<Post> {
+        val newPostList = localRepository.postContent(content.mapToData())
         return newPostList.map { it.mapToDomain() }
     }
 }

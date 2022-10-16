@@ -1,12 +1,17 @@
 package com.br.douglasalipio.data.local
 
-import com.br.douglasalipio.data.local.models.TweetModel
+import com.br.douglasalipio.data.local.models.PostModel
 import com.br.douglasalipio.data.local.models.ProfileModel
+import com.br.douglasalipio.domain.entities.PostType
 
 class PosterFeedLocalStorage {
 
-    private val posts = mutableListOf<TweetModel>()
+    private val posts = mutableListOf<PostModel>()
     private val users = mutableListOf<ProfileModel>()
+
+    companion object {
+        const val DEFAULT_USER_POST_SIZE = 1
+    }
 
     init {
         users.addAll(
@@ -38,25 +43,25 @@ class PosterFeedLocalStorage {
         )
         posts.addAll(
             listOf(
-                TweetModel(
+                PostModel(
                     content = "Hey folks, how are you?",
                     user = users[0],
-                    hasRepost = false
-                ), TweetModel(
+                    postType = PostType.POST
+                ), PostModel(
                     content = "Good morning everyone!",
                     user = users[1],
-                    hasRepost = false
+                    postType = PostType.POST
                 ),
-                TweetModel(
+                PostModel(
                     content =
                     "I have no idea whats going on wit my computer lol",
                     user = users[2],
-                    hasRepost = false
+                    postType = PostType.POST
                 ),
-                TweetModel(
+                PostModel(
                     content = "Happy new year!!!",
                     user = users[3],
-                    hasRepost = false
+                    postType = PostType.POST
                 )
             )
         )
@@ -66,18 +71,26 @@ class PosterFeedLocalStorage {
 
     fun getAllNames() = users.map { it.username }
 
-    fun getTotalPostByUser(userId: Int) = posts.filter { it.user.id == userId }.size
+    fun getTotalCountNumbers(): List<Int> {
+        return listOf(
+            posts.filter { it.user.id == 0 && it.postType == PostType.POST }.size,
+            posts.filter { it.user.id == 0 && it.postType == PostType.QUOTE_POST }.size,
+            posts.filter { it.user.id == 0 && it.postType == PostType.RE_POSTING }.size
+        )
+    }
+
+    fun getTotalPosts() = posts.filter { it.user.id == 0 }.size - DEFAULT_USER_POST_SIZE
 
     fun getUserById(userId: Int): ProfileModel {
         return users[userId]
     }
 
-    fun fetchFeed(): List<TweetModel> = posts
+    fun fetchFeed(): List<PostModel> = posts
 
     fun getDefaultUserProfile() = users[0]
 
-    fun postContent(tweetModel: TweetModel): List<TweetModel> {
-        posts.add(tweetModel)
+    fun postContent(postModel: PostModel): List<PostModel> {
+        posts.add(postModel)
         return posts.toList()
     }
 }

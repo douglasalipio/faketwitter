@@ -3,6 +3,7 @@ package com.br.douglasalipio.presentation.components.post
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.br.douglasalipio.domain.entities.PostType
 import com.br.douglasalipio.domain.interactors.GetAllUserNamesUseCase
 import com.br.douglasalipio.domain.interactors.PostUserCase
 import com.br.douglasalipio.domain.states.GetAllUsernamesState
@@ -17,21 +18,21 @@ class PostViewModel(
 
     fun getAllUsernames() {
         viewModelScope.launch {
-            getAllUserNamesUseCase.execute().let { getAllUsernamesState ->
-                when (getAllUsernamesState) {
+            getAllUserNamesUseCase.execute().let { postState ->
+                when (postState) {
                     is GetAllUsernamesState.Loaded -> viewState.value =
-                        PostViewState.UsernamesLoaded(getAllUsernamesState.usernames)
+                        PostViewState.UserLoaded(postState.usernames)
 
                     is GetAllUsernamesState.Fail -> viewState.value =
-                        PostViewState.UsernamesLoadFail
+                        PostViewState.UserLoadFail
                 }
             }
         }
     }
 
-    fun requestPostContent(content: String, hasRepost: Boolean, itemPosition: Int) {
+    fun requestPostContent(content: String, postType: PostType) {
         viewModelScope.launch {
-            postUserCase.execute(PostUserCase.Params(content, hasRepost, itemPosition))
+            postUserCase.execute(PostUserCase.Params(content, postType))
         }
     }
 

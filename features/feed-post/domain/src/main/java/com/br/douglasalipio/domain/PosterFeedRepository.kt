@@ -1,6 +1,6 @@
 package com.br.douglasalipio.domain
 
-import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.domain.entities.Post
 import com.br.douglasalipio.domain.entities.Profile
 
 interface PosterFeedRepository {
@@ -9,11 +9,13 @@ interface PosterFeedRepository {
 
     suspend fun getAllNames(): List<String>
 
-    suspend fun fetchFeed(): List<Tweet>
+    suspend fun fetchFeed(): List<Post>
 
     suspend fun getDefaultUserProfile(): Profile
 
-    suspend fun getTotalUserPosts(userId: Int): Int
+    suspend fun getCountNumbers(): List<Int>
 
-    suspend fun postContent(tweet: Tweet): List<Tweet>
+    suspend fun getTotalPosts(): Int
+
+    suspend fun postContent(content: Post): List<Post>
 }

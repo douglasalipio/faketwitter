@@ -1,7 +1,7 @@
 package com.br.douglasalipio.data
 
 import com.br.douglasalipio.data.local.PosterFeedLocalStorage
-import com.br.douglasalipio.data.local.models.TweetModel
+import com.br.douglasalipio.data.local.models.PostModel
 import com.br.douglasalipio.data.local.models.ProfileModel
 import com.br.douglasalipio.domain.PosterFeedRepository
 import io.mockk.MockKAnnotations
@@ -29,7 +29,7 @@ class PosterFeedRepositoryTest {
     @Test
     fun `WHEN fetch feed list is called THEN returns post list`() {
         //given
-        val posts = listOf<TweetModel>()
+        val posts = listOf<PostModel>()
         coEvery { localStorage.fetchFeed() } returns posts
         //when
         val domainPosts = runTest { repository.fetchFeed() }

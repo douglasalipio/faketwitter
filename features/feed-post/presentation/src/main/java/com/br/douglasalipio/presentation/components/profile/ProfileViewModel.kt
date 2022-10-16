@@ -3,19 +3,18 @@ package com.br.douglasalipio.presentation.components.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.br.douglasalipio.domain.interactors.GetCountNumbersUseCase
 import com.br.douglasalipio.domain.interactors.GetDefaultProfileUseCase
-import com.br.douglasalipio.domain.interactors.GetTotalUserTweetsUseCase
-import com.br.douglasalipio.domain.states.TotalPostsState
 import com.br.douglasalipio.domain.states.ProfileState
+import com.br.douglasalipio.domain.states.TotalCountNumberState
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val getDefaultUserProfile: GetDefaultProfileUseCase,
-    private val getTotalUserTweetsUseCase: GetTotalUserTweetsUseCase
+    private val getCountNumbersUseCase: GetCountNumbersUseCase
 ) : ViewModel() {
 
     val viewState = MutableLiveData<ProfileViewState>()
-    val totalPostsViewState = MutableLiveData<TotalPostsState>()
 
     fun loadUserProfile() {
         viewModelScope.launch {
@@ -33,17 +32,15 @@ class ProfileViewModel(
         }
     }
 
-    fun loadUserTotalPosts(userId: Int) {
-        val params = GetTotalUserTweetsUseCase.Params(userId)
-
+    fun loadCountNumbers() {
         viewModelScope.launch {
-            getTotalUserTweetsUseCase.execute(params).let { totalPostsState ->
+            getCountNumbersUseCase.execute().let { totalPostsState ->
                 when (totalPostsState) {
-                    is TotalPostsState.Loaded -> {
+                    is TotalCountNumberState.Loaded -> {
                         viewState.value =
                             ProfileViewState.TotalLoaded(totalPostsState.value)
                     }
-                    is TotalPostsState.Fail -> {
+                    is TotalCountNumberState.Fail -> {
                         viewState.value = ProfileViewState.LoadFail
                     }
                 }

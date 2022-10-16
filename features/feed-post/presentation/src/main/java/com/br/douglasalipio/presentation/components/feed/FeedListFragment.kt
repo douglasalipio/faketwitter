@@ -4,19 +4,29 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 
-import com.br.douglasalipio.domain.entities.Tweet
+import com.br.douglasalipio.domain.entities.Post
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.br.douglasalipio.data.local.models.PostModel
+import com.br.douglasalipio.domain.entities.PostType
 import com.br.douglasalipio.presentation.R
-import com.br.douglasalipio.presentation.databinding.PosterFragmentListBinding
+import com.br.douglasalipio.presentation.components.post.PostViewModel
+import com.br.douglasalipio.presentation.databinding.FeedListFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FeedListFragment : Fragment(R.layout.feed_list_fragment) {
 
-    private val viewBinding by viewBinding(PosterFragmentListBinding::bind)
+    private val viewBinding by viewBinding(FeedListFragmentBinding::bind)
     private val viewModel: FeedViewModel by viewModel()
-    private val onRetweetActionClick: (String, Int) -> Unit = this::onRetweetActionClicked
+    private val sharedViewModel: PostViewModel by sharedViewModel()
+    private val onQuotePostActionClick: (String) -> Unit = this::onQuotePostActionClicked
+    private val onRepostActionClick: (String) -> Unit = this::onPostActionClicked
+    private var content: String = ""
+    private var postType: PostType = PostType.POST
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,34 +38,68 @@ class FeedListFragment : Fragment(R.layout.feed_list_fragment) {
     private fun setUpEvents() {
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is FeedViewState.LoadFail -> {}
-                is FeedViewState.Loaded -> showFeedList(state.tweets)
+                is FeedViewState.FeedListLoaded -> showFeedList(state.tweets)
+                is FeedViewState.PostContentAllowed -> {
+                    if (PostType.RE_POSTING == postType) {
+                        navigateBackToPostListScreen()
+                    } else
+                        navigateToPostContentBottomSheet()
+                }
+                is FeedViewState.PostContentNotAllowed -> {
+                    Toast.makeText(requireContext(), "Only 5 posts per day.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                is FeedViewState.Fail -> {}
+
             }
         }
     }
 
     private fun setUpComponents() {
-        viewBinding.postContentButton.setOnClickListener { navigateToPostContentBottomSheet() }
+        viewBinding.postContentButton.setOnClickListener {
+            postType = PostType.POST
+            viewModel.loadTotalUserPosts()
+        }
     }
 
-    private fun onRetweetActionClicked(content: String, itemPosition: Int) {
-
-        navigateToPostContentBottomSheet(content, itemPosition)
+    private fun onPostActionClicked(content: String) {
+        this.content = content
+        this.postType = PostType.RE_POSTING
+        viewModel.loadTotalUserPosts()
     }
 
-    private fun navigateToPostContentBottomSheet(value: String = "", itemPosition: Int = 0) {
+    private fun onQuotePostActionClicked(content: String) {
+        this.content = content
+        this.postType = PostType.QUOTE_POST
+        viewModel.loadTotalUserPosts()
+    }
+
+    private fun navigateBackToPostListScreen() {
+        sharedViewModel.requestPostContent(content, postType)
+        val action =
+            FeedListFragmentDirections.actionPosterFragmentListViewSelf()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToPostContentBottomSheet() {
         val action =
             FeedListFragmentDirections.actionPosterListFragmentToPostContentBottomSheet(
-                value,
-                itemPosition
+                content,
+                postType
             )
         findNavController().navigate(action)
     }
 
-    private fun showFeedList(tweets: List<Tweet>) {
+    private fun showFeedList(tweets: List<Post>) {
         viewBinding.list.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = FeedRecyclerViewAdapter(tweets, onRetweetActionClick)
+            adapter = FeedRecyclerViewAdapter(tweets, onQuotePostActionClick, onRepostActionClick)
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
         }
     }
 }
