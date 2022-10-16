@@ -12,7 +12,7 @@ import com.br.douglasalipio.presentation.R
 import com.br.douglasalipio.presentation.databinding.PosterFragmentListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FeedListFragment : Fragment(R.layout.poster_fragment_list) {
+class FeedListFragment : Fragment(R.layout.feed_list_fragment) {
 
     private val viewBinding by viewBinding(PosterFragmentListBinding::bind)
     private val viewModel: FeedViewModel by viewModel()

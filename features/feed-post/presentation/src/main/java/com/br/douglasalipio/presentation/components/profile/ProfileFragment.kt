@@ -9,7 +9,7 @@ import com.br.douglasalipio.presentation.R
 import com.br.douglasalipio.presentation.databinding.ProfileFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment : Fragment(R.layout.profile_fragment) {
+class ProfileFragment : Fragment(R.layout.user_profile_fragment) {
 
     private val viewBinding by viewBinding(ProfileFragmentBinding::bind)
     private val viewModel: ProfileViewModel by viewModel()
