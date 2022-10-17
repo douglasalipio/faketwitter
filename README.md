@@ -36,4 +36,4 @@ First try to identify the problem through some error management tool like Crashl
 
 ## Assuming your app has now thousands of users thus a lot of posts to show in the feed. What do you believe should be improved in this initial version and what strategies/proposals you could formulate for such a challenge?
 
-Uma boa estrategia de escalabilidade seria a criacao de uma camada de cache para diminuir a quantidade de requisicoes no servidor
+A good scaling strategy would be to create a cache layer to reduce the amount of requests on the server.
