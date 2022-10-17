@@ -17,8 +17,13 @@
 ## Project architecture
 The project was developed based on clean architecture and separated by modules such as domain, presentation, and data.
 
+* Presentation - MVVM was developed to communicate with the UI 
+* Domain - Usecase pattern to handle business logic
+* Data - Repository pattern to handle local data
+
 ## Relevant 3rd party libraries
 * Livedata
+* Viewmodel
 * Mockk
 * Junit
 * Circleimageview
