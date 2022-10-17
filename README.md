@@ -3,6 +3,9 @@
 
 ## Video demo
 
+<img src ="https://github.com/douglasalipio/faketwitter/blob/master/demo_resources/demo_image_1.png"  width="360"/>&nbsp;&nbsp;
+<img src ="https://github.com/douglasalipio/faketwitter/blob/master/demo_resources/demo_image_2.png" width="360" />&nbsp;&nbsp;
+
 [[Video]](https://github.com/douglasalipio/faketwitter/blob/master/demo_resources/full_demo_smallest.mp4)
 
 ## Relevant feature developed
