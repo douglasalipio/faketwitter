@@ -32,7 +32,7 @@ In case of more development time, I could develop more unit tests to improve tes
 
 ## Assuming you've got multiple crash reports and reviews saying the app is not working properly and is slow for specific models, what would be your strategy to tackle the problem? (assuming the app is supposed to work well for these models)
 
-First try to identify the problem through some error management tool like Crashlitics. After analyzing the error files, I would check Proguard (code obfuscation tool) to verify  It is not changed the model name. 
+First try to identify the problem through some error management tool like Crashlitics. After analyzing the error files, I would check Proguard (code obfuscation tool) to verify  It is not changed the model name on production build. 
 
 ## Assuming your app has now thousands of users thus a lot of posts to show in the feed. What do you believe should be improved in this initial version and what strategies/proposals you could formulate for such a challenge?
 
