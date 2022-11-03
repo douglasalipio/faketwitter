@@ -32,16 +32,3 @@ The project was developed based on clean architecture and separated by modules s
 * Circleimageview
 * Navigation
 * Koin
-
-# Questions
-
-## Reflect on this project, and write what you would improve if you had more time.
-In case of more development time, I could develop more unit tests to improve test coverage and improve the UI of the application. Also create a build source to manager all dependencies from modules.
-
-## Assuming you've got multiple crash reports and reviews saying the app is not working properly and is slow for specific models, what would be your strategy to tackle the problem? (assuming the app is supposed to work well for these models)
-
-First try to identify the problem through some error management tool like Crashlitics. After analyzing the error files, I would check Proguard (code obfuscation tool) to verify  It is not changed the model name on production build. 
-
-## Assuming your app has now thousands of users thus a lot of posts to show in the feed. What do you believe should be improved in this initial version and what strategies/proposals you could formulate for such a challenge?
-
-A good scaling strategy would be to create a cache layer to reduce the amount of requests on the server.
